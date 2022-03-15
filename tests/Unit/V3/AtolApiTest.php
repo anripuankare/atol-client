@@ -2,6 +2,7 @@
 
 namespace Lamoda\AtolClient\Tests\Unit\V3;
 
+use GuzzleHttp\Exception\GuzzleException;
 use Lamoda\AtolClient\Converter\ObjectConverter;
 use Lamoda\AtolClient\V3\AtolApi;
 use Lamoda\AtolClient\V3\DTO\GetTokenResponse;
@@ -188,11 +189,10 @@ class AtolApiTest extends TestCase
         $this->assertSame($responseObject, $result);
     }
 
-    /**
-     * @expectedException \GuzzleHttp\Exception\GuzzleException
-     */
     public function testResponseException()
     {
+        $this->expectException(GuzzleException::class);
+
         /* @see AtolApi::request */
         $this->client
             ->expects($this->once())
@@ -205,7 +205,7 @@ class AtolApiTest extends TestCase
     /**
      * {@inheritdoc}
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->converter = $this->createMock(ObjectConverter::class);
         $this->client = $this->createMock(ClientInterface::class);

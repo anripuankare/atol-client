@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Lamoda\AtolClient\Tests\Unit\V3\DTO\Sell\Request\Receipt;
 
+use Lamoda\AtolClient\Exception\VatException;
 use Lamoda\AtolClient\V3\DTO\Sell\Request\Receipt\Item\Tax;
 use PHPUnit\Framework\TestCase;
 
@@ -41,10 +42,11 @@ class TaxTest extends TestCase
      * @param int $integer
      *
      * @dataProvider dataFromIntegerException
-     * @expectedException \Lamoda\AtolClient\Exception\VatException
      */
     public function testFromIntegerException($integer): void
     {
+        $this->expectException(VatException::class);
+
         Tax::fromInteger($integer);
     }
 

@@ -41,8 +41,8 @@ class ErrorTest extends TestCase
             ],
             'empty' => [
                 [
-                    'text' => null,
-                    'type' => null,
+                    'text' => "",
+                    'type' => "",
                 ],
                 2,
                 new Error\ErrorCode(2),

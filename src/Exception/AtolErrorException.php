@@ -28,7 +28,7 @@ class AtolErrorException extends \RuntimeException
     public static function becauseOfAtolError(Error $error)
     {
         return new static(
-            $error->getText(),
+            $error->getText() ?? '',
             $error->getCode()->getNumber(),
             $error->getType()
         );

@@ -17,7 +17,7 @@ class Error
      *
      * @var string
      */
-    private $text;
+    private string $text = '';
 
     /**
      * @Serializer\Type("string")
@@ -25,12 +25,12 @@ class Error
      *
      * @var string
      */
-    private $type;
+    private string $type = '';
 
     /**
      * @return string
      */
-    public function getText(): ?string
+    public function getText(): string
     {
         return $this->text;
     }
@@ -38,7 +38,7 @@ class Error
     /**
      * @return string
      */
-    public function getType(): ?string
+    public function getType(): string
     {
         return $this->type;
     }

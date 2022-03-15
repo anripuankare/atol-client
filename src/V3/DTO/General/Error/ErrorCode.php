@@ -37,7 +37,7 @@ class ErrorCode
     /**
      * @var int
      */
-    private $number;
+    private int $number;
 
     /**
      * @param int|null $number

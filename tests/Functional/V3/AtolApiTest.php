@@ -37,7 +37,7 @@ class AtolApiTest extends TestCase
      */
     private $client;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -157,11 +157,10 @@ JSON
         $this->callRegister($register, $validRequest);
     }
 
-    /**
-     * @expectedException \GuzzleHttp\Exception\ClientException
-     */
     public function testGuzzleException(): void
     {
+        $this->expectException(ClientException::class);
+
         $this->client
             ->method('send')
             ->willThrowException($this->createMock(ClientException::class));
@@ -171,12 +170,12 @@ JSON
 
     /**
      * @dataProvider getRegisterProvider
-     *
-     * @expectedException \Lamoda\AtolClient\Exception\ValidationException
-     * @expectedExceptionMessage Object should contain either phone or email.
      */
     public function testRegisterRequestException(Closure $register): void
     {
+        $this->expectException(ValidationException::class);
+        $this->expectExceptionMessage('Object should contain either phone or email.');
+
         $invalidRequest = $this->createSellRequest(true);
         $this->callRegister($register, $invalidRequest);
     }

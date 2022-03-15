@@ -15,7 +15,7 @@ use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\RequestOptions;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
-use function GuzzleHttp\Psr7\build_query;
+use GuzzleHttp\Psr7\Query;
 
 /**
  * API to interact with ATOL.
@@ -165,7 +165,7 @@ class AtolApi
     private function request(string $method, string $path, array $query = [], $body = null): string
     {
         // Prepare request:
-        $query = build_query($query);
+        $query = Query::build($query);
         $body = $this->parseBody($body);
         $path = trim($path, '/');
         $request = new Request(

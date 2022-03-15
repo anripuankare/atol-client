@@ -4,6 +4,8 @@ namespace Lamoda\AtolClient\Tests\Unit\Converter;
 
 use Lamoda\AtolClient\Converter\ObjectConverter;
 use JMS\Serializer\SerializerInterface;
+use Lamoda\AtolClient\Exception\ParseException;
+use Lamoda\AtolClient\Exception\ValidationException;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Validator\ConstraintViolationListInterface;
@@ -33,7 +35,7 @@ class ObjectConverterTest extends TestCase
     /**
      * {@inheritdoc}
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->serializer = $this->createMock(SerializerInterface::class);
         $this->validator = $this->createMock(ValidatorInterface::class);
@@ -63,11 +65,10 @@ class ObjectConverterTest extends TestCase
         $this->assertSame($json, $result);
     }
 
-    /**
-     * @expectedException \Lamoda\AtolClient\Exception\ParseException
-     */
     public function testGetRequestStringParseException()
     {
+        $this->expectException(ParseException::class);
+
         /* @see ObjectConverter::assertValid() */
         $this->validator
             ->method('validate')
@@ -82,12 +83,11 @@ class ObjectConverterTest extends TestCase
         $this->objectConverter->getRequestString((object) []);
     }
 
-    /**
-     * @expectedException \Lamoda\AtolClient\Exception\ValidationException
-     * @expectedExceptionCode 2
-     */
     public function testGetRequestStringInvalid()
     {
+        $this->expectException(ValidationException::class);
+        $this->expectExceptionCode(2);
+
         $object = (object) [];
         $errors = $this->createMock(ConstraintViolationListInterface::class);
 
@@ -128,12 +128,11 @@ class ObjectConverterTest extends TestCase
         $this->assertSame($object, $result);
     }
 
-    /**
-     * @expectedException \Lamoda\AtolClient\Exception\ParseException
-     * @expectedExceptionCode 2
-     */
     public function testGetResponseObjectParseException()
     {
+        $this->expectException(ParseException::class);
+        $this->expectExceptionCode(2);
+
         /* @see ObjectConverter::deserialize() */
         $this->serializer
             ->method('deserialize')
@@ -142,12 +141,11 @@ class ObjectConverterTest extends TestCase
         $this->objectConverter->getResponseObject('class', 'json');
     }
 
-    /**
-     * @expectedException \Lamoda\AtolClient\Exception\ValidationException
-     * @expectedExceptionCode 2
-     */
     public function testGetResponseObjectInvalid()
     {
+        $this->expectException(ValidationException::class);
+        $this->expectExceptionCode(2);
+
         $errors = $this->createMock(ConstraintViolationListInterface::class);
 
         /* @see ObjectConverter::assertValid() */
