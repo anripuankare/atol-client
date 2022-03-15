@@ -14,7 +14,7 @@ Usage is as simple as
 
 1. Install library
 	```bash
-	composer require lamoda/atol-client
+	composer require anripuankare/atol-client
 	```
 
 2. Better to use this library with symfony: https://github.com/lamoda/atol-client-bundle

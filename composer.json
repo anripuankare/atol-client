@@ -1,12 +1,12 @@
 {
-    "name": "lamoda/atol-client",
+    "name": "anripuankare/atol-client",
     "description": "ATOL API v3/v4 client for php",
     "type": "library",
     "license": "MIT",
     "authors": [
         {
-            "name": "Pavel Agaletskiy",
-            "email": "pavel.agaletskiy@lamoda.ru"
+            "name": "Sokolov Artem",
+            "email": "a.sokolov@reg.ru"
         }
     ],
     "minimum-stability": "stable",
