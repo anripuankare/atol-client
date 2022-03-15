@@ -5,6 +5,10 @@
     "license": "MIT",
     "authors": [
         {
+            "name": "Pavel Agaletskiy",
+            "email": "pavel.agaletskiy@lamoda.ru"
+        },
+        {
             "name": "Sokolov Artem",
             "email": "a.sokolov@reg.ru"
         }
